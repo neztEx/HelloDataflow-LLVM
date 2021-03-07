@@ -14,20 +14,15 @@ using namespace std;
 using namespace llvm;
 
 namespace {
-struct Liveness : public FunctionPass {
+struct Liveness : public ModulePass {
     static char ID;
     
-    Liveness() : FunctionPass(ID) {}
-
+    Liveness() : ModulePass(ID) {}
     
-    
-    
-    
-    
-    bool runOnFunction(Function &F) override {
+    bool runOnModule(Module &M) override {
 	    
         errs() << "----- entry -----\n";
-        for (auto& basic_block : F)
+        for (auto& basic_block : M)
         {
            
         } // end for block
