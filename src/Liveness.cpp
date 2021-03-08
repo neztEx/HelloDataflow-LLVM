@@ -48,15 +48,7 @@ struct Liveness : public FunctionPass {
                 else if(inst.getOpcode() == Instruction::Load){
                     valueNames[&inst] = inst.getOperand(0)->getName().str();
                 }
-                else if (inst.isBinaryOp()){
-                    if(VarKill[&basic_block].find(valueNames[inst.getOperand(0)]) == VarKill[&basic_block].end()){
-                        UEVar[&basic_block].insert(valueNames[inst.getOperand(0)]);
-                    }
-                    if(VarKill[&basic_block].find(valueNames[inst.getOperand(1)]) == VarKill[&basic_block].end()){
-                        UEVar[&basic_block].insert(valueNames[inst.getOperand(1)]);
-                    }
-                }
-                else if (inst.getOpcode() == 52){
+                else if (inst.isBinaryOp() || inst.getOpcode() == 52){
                     if(VarKill[&basic_block].find(valueNames[inst.getOperand(0)]) == VarKill[&basic_block].end()){
                         UEVar[&basic_block].insert(valueNames[inst.getOperand(0)]);
                     }
