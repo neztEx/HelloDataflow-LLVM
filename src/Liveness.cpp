@@ -35,11 +35,7 @@ struct Liveness : public FunctionPass {
             VarKill[&basic_block] = set<string>();
             UEVar[&basic_block] = set<string>();
             for(auto& inst : basic_block){
-                if(inst.getOpcode() == Instruction::Alloca){
-                    //Is allocate instruction
-                    //do nothing
-                }
-                else if(inst.getOpcode() == Instruction::Store){
+                if(inst.getOpcode() == Instruction::Store){
                     if(valueNames.find(inst.getOperand(0)) != valueNames.end()){
                         UEVar[&basic_block].insert(valueNames[inst.getOperand(0)]);
                     }
