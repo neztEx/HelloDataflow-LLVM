@@ -9,6 +9,7 @@ include_directories(${LLVM_INCLUDE_DIRS})
 
 add_library(LLVMLivenessPass MODULE Liveness.cpp)
 set_target_properties(LLVMLivenessPass PROPERTIES COMPILE_FLAGS "-D__GLIBCXX_USE_CXX11_ABI=0 ")
-SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
-
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
+endif ()
 target_link_libraries(LLVMLivenessPass)
